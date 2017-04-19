@@ -1,3 +1,4 @@
 <?php
-    echo "qq";
+$name = $_GET['name'];
+    echo "qq, $name";
 ?>
