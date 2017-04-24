@@ -9,14 +9,19 @@ $result = pg_query($db, "CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY,
     name varchar(30) DEFAULT NULL,
     pts INT DEFAULT 0);");
-$name = $_POST['name'];
-$pts = $_POST['pts'];
+$name = $_POST[name];
+$pts = $_POST[pts];
 
 if (isset($name) && isset($pts))
-    $result = pg_query($db, "insert into users values (NULL, $name, $pts)");
+    if (($db) && ($result))
+        $result = pg_query($db, "insert into users values (NULL, $name, $pts)");
+    else {
+        echo "DB error, go f*ck urself\n";
+        echo pg_result_error($result);
+    }
 else {
-    echo "Nothing here, go f*ck urself";
-}
+        echo "Nothing here, go f*ck urself\n";
+    }
 $result = pg_query($db, "select * from users");
 
 while($row = pg_fetch_assoc($result)) {
