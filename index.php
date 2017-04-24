@@ -9,4 +9,17 @@ $result = pg_query($db, "CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY,
     name varchar(30) DEFAULT NULL,
     pts INT DEFAULT 0);");
+$name = $_POST['name'];
+$pts = $_POST['pts'];
+
+$result = pg_query($db, "insert into users values (NULL, $name, $pts)");
+
+$result = pg_query($db, "select * from users");
+
+while($row = pg_fetch_assoc($result)) {
+    echo $row['id'];
+    echo $row['name'];
+    echo $row['pts'];
+}
+
 ?>
