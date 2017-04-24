@@ -12,8 +12,11 @@ $result = pg_query($db, "CREATE TABLE IF NOT EXISTS users(
 $name = $_POST['name'];
 $pts = $_POST['pts'];
 
-$result = pg_query($db, "insert into users values (NULL, $name, $pts)");
-
+if (isset($name) && isset($pts))
+    $result = pg_query($db, "insert into users values (NULL, $name, $pts)");
+else {
+    echo "Nothing here, go f*ck urself";
+}
 $result = pg_query($db, "select * from users");
 
 while($row = pg_fetch_assoc($result)) {
